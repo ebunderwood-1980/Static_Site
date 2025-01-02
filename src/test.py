@@ -8,4 +8,7 @@ h1 = HTMLNode(
 )
 print(h1.props_to_html())
 
+printed = h1.__repr__()
+
 print(f"Node Printing: {h1}")
+print(printed)
