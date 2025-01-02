@@ -4,7 +4,8 @@ from textnode import TextNode, TextType
 def main():
     print("Hello world")
 
-    myTextNode = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
+    myTextNode = TextNode("This is a text node",
+                          TextType.BOLD, "https://www.boot.dev")
     yourTextNode = TextNode(
         "This is a text node", TextType.BOLD, "https://www.boot.dev"
     )
