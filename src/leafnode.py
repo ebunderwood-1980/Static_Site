@@ -14,7 +14,8 @@ class LeafNode(HTMLNode):
         else:
             if self.props:
                 for key in self.props:
-                    props_accumulator = f'{props_accumulator} {key}="{self.props[key]}"'
+                    props_accumulator = f'{props_accumulator} {
+                        key}="{self.props[key]}"'
                 return f"<{self.tag}{props_accumulator}>{self.value}</{self.tag}>"
             else:
                 return f"<{self.tag}>{self.value}</{self.tag}>"
