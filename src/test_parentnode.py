@@ -22,8 +22,7 @@ class TestTextNode(unittest.TestCase):
 
     def test_nested(self):
         inner_node = ParentNode(
-            "ul", [LeafNode("li", "list item 1"),
-                   LeafNode("li", "list item 2")]
+            "ul", [LeafNode("li", "list item 1"), LeafNode("li", "list item 2")]
         )
 
         outer_node = ParentNode("div", [inner_node])
