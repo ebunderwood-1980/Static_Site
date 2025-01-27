@@ -23,13 +23,35 @@ class TestBlocktoBlockType(unittest.TestCase):
             "* First item \n  Second item",
             "*First item",
             "1. First item\n2. Second item",
-            "0. Zero\n1. First"
+            "0. Zero\n1. First",
+            "1. First\nSecond\n2. Second",
         ]
 
-        function_results = list(map(lambda x: block_to_block_type([x]), inputs))
+        function_results = list(map(lambda x: block_to_block_type(x), inputs))
         print(function_results)
-        correct_answers = [['h'], ['h'], ['h'], [None], ['c'], ['c'], ['c'], [None], [None], ['q'], ['q'], [None], ['u'], ['u'], ['u'], [None], [None], [None], ['o'], [None]]
-
+        correct_answers = [
+            'heading',
+            'heading',
+            'heading',
+            'normal',
+            'code',
+            'code',
+            'code',
+            'normal',
+            'normal',
+            'quote',
+            'quote',
+            'normal',
+            'unordered list',
+            'unordered list',
+            'unordered list',
+            'normal',
+            'normal',
+            'normal',
+            'ordered list',
+            'normal',
+            'normal',   
+        ]
         self.assertEqual(function_results, correct_answers)
         
 
