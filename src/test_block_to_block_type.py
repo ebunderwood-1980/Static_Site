@@ -27,6 +27,7 @@ class TestBlocktoBlockType(unittest.TestCase):
         ]
 
         function_results = list(map(lambda x: block_to_block_type([x]), inputs))
+        print(function_results)
         correct_answers = [['h'], ['h'], ['h'], [None], ['c'], ['c'], ['c'], [None], [None], ['q'], ['q'], [None], ['u'], ['u'], ['u'], [None], [None], [None], ['o'], [None]]
 
         self.assertEqual(function_results, correct_answers)

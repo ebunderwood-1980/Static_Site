@@ -11,40 +11,33 @@ def split_blocks(markdown_text):
     #Return stripped blocks   
     return list(map(lambda x: x.strip(), split_text))
 
-def block_to_block_type(markdown_blocks):
-    results = []
-    for block in markdown_blocks:
-        if re.search(r'^#{1,6}\s{1}[\s\w]+$', block, re.IGNORECASE):
-            results.append('h')
-        elif re.search(r'^`{3}[\s\S]*`{3}$', block, re.IGNORECASE):
-            results.append('c')
-        elif re.search(r'^(>.*)(\n>.*)*$', block, re.IGNORECASE):
-            results.append('q')
-        elif re.search(r'^[*|\-] .*(\n[*|\-] .*)*$', block, re.IGNORECASE):
-            results.append('u')
-        elif re.search(r'^(\d+)\. ', block):
-            lines = block.split('\n')            
-            print(lines)
-            expected_number = 0
-            for line in lines:
-                match = re.match(r'^(\d+)\. ', line)
-                if match:
-                    current_number = int(match.group(1))
-                    if current_number != expected_number + 1:
-                        results.append(None)
-                        break
-                    expected_number = current_number
-                else:
-                    results.append(None)
-                    break
-            results.append('o')
-        else:
-            results.append(None)
-    return results
+def block_to_block_type(block):
+    if re.search(r'^#{1,6}\s{1}[\s\w]+$', block, re.IGNORECASE):
+        return('heading')
+    if re.search(r'^`{3}[\s\S]*`{3}$', block, re.IGNORECASE):
+        return('code')
+    if re.search(r'^(>.*)(\n>.*)*$', block, re.IGNORECASE):
+        return('quote')
+    if re.search(r'^[*-] .*(\n[*-] .*)*$', block, re.IGNORECASE):
+        return('unordered list')
+    if re.search(r'^(\d+)\. ', block):
+        lines = block.split('\n')            
+        expected_number = 1
+        for line in lines:
+            match = re.match(r'^(\d+)\. ', line)
+            if match:
+                current_number = int(match.group(1))
+                if current_number != expected_number:
+                    return('normal')
+                expected_number = current_number + 1
+            else:
+                return('normal')
+        return('ordered list')
+    return('normal')
         
 # def main():
-#     input = "1. First Item\n2. Second Item"
-#     print(f"Result: {block_to_block_type([input])}")
+#     input = "1. First item\n2. Second item"
+#     print(f"Result: {block_to_block_type(input)}")
 
 
 # if __name__ == '__main__':
